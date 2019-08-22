@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo"></p>
+        <script>
+        var data;
+        var tableData = {
+            result: {
+                columns: ['name', 'age', 'role'],
+                rowData: [{
+                    name: 'afds',
+                    age: 34,
+                    role: 'dsfds'
+                }, {
+                    name: 'afdsf',
+                    age: 343,
+                    role: 'adf'
+                }, {
+                    name: 'afsaf',
+                    age: 342,
+                    role: 'afdsf'
+                }]
+            }
+        }
+        function showList() {
+            data = '<table border="1"><tr>'
+            for (var i=0; i < tableData.result.columns.length; i++){
+                data+= '<th>'+tableData.result.columns[i];
+            }
+            data += '</th></tr>'
+            for (var i = 0; i < tableData.result.rowData.length; i++) {
+                data += "<tr><td>" + tableData.result.rowData[i].name + "</td><td>" + tableData.result.rowData[i].age + 
+                "</td><td>" + tableData.result.rowData[i].role+"</td></tr>";
+            }
+            data += "</table>"
+            document.getElementById("demo").innerHTML = data;
+        }
+        showList();
+        </script>
+    </body>
+</html>

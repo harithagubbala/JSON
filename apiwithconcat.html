@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="text" id="pincode">
+        <button type="button" onclick="showList()">Submit</button>
+        <p id="demo"></p>
+        <script>
+            
+        function showList(){
+            var pin = document.getElementById("pincode").value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myObj = JSON.parse(this.responseText);
+                    var data = '<table border="1"><tr>'
+                    for(var i=0;i<Object.keys(myObj[0].PostOffice[0]).length;i++){
+                        data += '<th>'+Object.keys(myObj[0].PostOffice[0])[i];
+                    }
+                    data += '</th></tr>'
+                    for (var j = 0; j < myObj[0].PostOffice.length; j++) {
+                        data += "<tr><td>" + myObj[0].PostOffice[j].Name + "</td><td>" + myObj[0].PostOffice[j].Description +
+                        "</td><td>" + myObj[0].PostOffice[j].BranchType + "</td><td>" + myObj[0].PostOffice[j].DeliveryStatus + 
+                        "</td><td>" + myObj[0].PostOffice[j].Circle + "</td><td>" + myObj[0].PostOffice[j].Division + 
+                        "</td><td>" + myObj[0].PostOffice[j].Division + "</td><td>" + myObj[0].PostOffice[j].Region + 
+                        "</td><td>" + myObj[0].PostOffice[j].Block + "</td><td>" + myObj[0].PostOffice[j].State + 
+                        "</td><td>" + myObj[0].PostOffice[j].Country + "</td><td>" + myObj[0].PostOffice[j].Pincode +"</td></tr>";
+                    }
+                    data += "</table>"
+                    document.getElementById("demo").innerHTML = data;
+                }
+            }
+            xmlhttp.open("GET", "https://api.postalpincode.in/pincode/"+pin, true);
+            xmlhttp.send();
+        }
+        </script>
+    </body>
+</html>
